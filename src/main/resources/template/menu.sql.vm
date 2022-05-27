@@ -1,0 +1,15 @@
+-- menu SQL
+INSERT INTO `sys_menu` (`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`)
+    VALUES ('1', '${comments}', '${moduleName}/${pathName}', NULL, '1', 'config', '6');
+
+set @parentId = @@identity;
+
+-- menu button SQL
+INSERT INTO `sys_menu` (`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`)
+    SELECT @parentId, 'detail', null, '${moduleName}:${pathName}:list,${moduleName}:${pathName}:info', '2', null, '6';
+INSERT INTO `sys_menu` (`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`)
+    SELECT @parentId, 'add', null, '${moduleName}:${pathName}:save', '2', null, '6';
+INSERT INTO `sys_menu` (`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`)
+    SELECT @parentId, 'modify', null, '${moduleName}:${pathName}:update', '2', null, '6';
+INSERT INTO `sys_menu` (`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`)
+    SELECT @parentId, 'delete', null, '${moduleName}:${pathName}:delete', '2', null, '6';
